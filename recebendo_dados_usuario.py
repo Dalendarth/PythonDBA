@@ -57,4 +57,4 @@ print(f'O(A) {nome} tem {idade} anos')
 Cast é a conversão de um tipo de dado para outro;
 Cast pode ser usado na linha 46 da seguinte forma -> idade = int (input('Qual sua idade?')), o resultado é abreviado
 """
-print(f'O(A) {nome} nasceu em {2022 - int (idade)}')d
+print(f'O(A) {nome} nasceu em {2022 - int (idade)}')
