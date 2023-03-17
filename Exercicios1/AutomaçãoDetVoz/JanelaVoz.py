@@ -4,7 +4,6 @@ import speech_recognition as sr
 from PyQt5.QtWidgets import QApplication, QWidget, QPushButton, QTextEdit, QVBoxLayout
 
 
-
 def reconhecer_fala():
     reconhecedor = sr.Recognizer()
     with sr.Microphone() as fonte_audio:
@@ -15,10 +14,10 @@ def reconhecer_fala():
     except:
         return "Não foi possível entender a fala"
 
-def reconhecer(caixa_texto=3):
+
+def reconhecer(caixa_texto=1):
     texto = reconhecer_fala()
     caixa_texto.setText(texto)
-
 
 
 class Janela(QWidget):
@@ -37,6 +36,7 @@ class Janela(QWidget):
         self.setGeometry(300, 300, 400, 360)
         self.setWindowTitle('Reconhecimento de voz')
         self.show()
+
 
 if __name__ == '__main__':
     app = QApplication(sys.argv)
