@@ -1,17 +1,22 @@
 from qiskit import QuantumCircuit, Aer, execute
 
-# circuito em qbit
-qc = QuantumCircuit(1)
+# cria um circuito quântico com 1 qubit
+qc = QuantumCircuit(1, 1)
 
-# porta Hadamard no qubit
+# aplica a porta Hadamard no qubit
 qc.h(0)
 
 # mede o qubit
-qc.measure_all()
+qc.measure(0, 0)
 
-# simulador executando
-Interno = Aer.get_backend("QSimulador")
-Solucao = execute(qc, Interno).result()
+# obtém o backend do simulador
+backend = Aer.get_backend('qasm_simulator')
 
-# resultado
-print(Solucao.Cont.C())
+# executa o circuito no simulador
+job = execute(qc, backend, shots=1024)
+
+# obtém o resultado da execução
+result = job.result()
+
+# exibe o resultado
+print(result.get_counts())
