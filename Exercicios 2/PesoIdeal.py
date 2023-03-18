@@ -10,9 +10,3 @@ elif s == "f":
     print(f"O peso ideal para uma mulher com {alt}m de altura é de {PesoIdeal}kg")
 else:
     print("Sexo invalido, pressione M para masculino ou F para feminino.")
-
-
-
-
-
-
