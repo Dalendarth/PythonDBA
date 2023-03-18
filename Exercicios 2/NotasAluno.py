@@ -31,3 +31,4 @@ else:
                 break
             else:
                 print("Opção inválida. Digite S para calcular a média ou N para encerrar o programa.")
+
