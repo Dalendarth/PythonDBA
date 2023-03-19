@@ -98,6 +98,8 @@ if nome_usuario not in usuarios:
 
 # Verificar a identidade do usuário
 def solicitar_acao():
+    pass
+
 
 if verificar_identidade(nome_usuario):
     solicitar_acao()
