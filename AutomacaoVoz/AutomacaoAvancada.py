@@ -1,11 +1,12 @@
 import speech_recognition as sr
 import hashlib
-
 import os
+
 # Verificar se o arquivo de usuários existe
 if not os.path.isfile('usuarios.txt'):
     # Se o arquivo não existe, criá-lo vazio
     open('usuarios.txt', 'a').close()
+
 
 # Função para criar um hash seguro de uma string
 def criar_hash(s):
@@ -35,7 +36,16 @@ def cadastrar_usuario():
     # Solicitar informações de identificação do usuário
     nome = input("Digite seu nome: ")
     print("Agora, por favor, diga sua senha para confirmar sua identidade.")
-    senha = reconhecer_voz()
+
+    # Loop para tentar reconhecer a senha do usuário
+    senha = None
+    while senha is None:
+        senha = reconhecer_voz()
+
+        # Verificar se a senha foi reconhecida corretamente
+        if senha is None:
+            print("Não foi possível reconhecer a senha. Por favor, tente novamente.")
+
     senha_hash = criar_hash(senha)
 
     # Armazenar a voz do usuário e sua senha em um arquivo seguro
@@ -47,7 +57,8 @@ def cadastrar_usuario():
 
 
 # Função para verificar a identidade do usuário
-def verificar_identidade(senha_hash):
+def verificar_identidade(nome_usuario):
+    senha_hash = usuarios[nome_usuario]
     tentativas = 3
     while tentativas > 0:
         print("Por favor, diga sua senha para confirmar sua identidade.")
@@ -64,21 +75,6 @@ def verificar_identidade(senha_hash):
     return False
 
 
-# Função para solicitar a senha do usuário para executar uma ação
-def solicitar_acao(senha_destravar=10, senha_travar=10):
-    print("Por favor, diga 'travar' ou 'destravar' para realizar a ação desejada.")
-    acao = reconhecer_voz()
-    if acao == senha_travar:
-        print("Travando o desktop...")
-        # Código para travar o desktop
-    elif acao == senha_destravar:
-        print("Destravando o desktop...")
-        # Código para destravar o desktop
-    else:
-        print("Ação inválida. Tente novamente.")
-        solicitar_acao()
-
-
 # Carregar informações de usuários registrados de um arquivo seguro
 usuarios = {}
 with open('usuarios.txt', 'r') as f:
@@ -87,12 +83,23 @@ with open('usuarios.txt', 'r') as f:
         if len(partes) == 2:
             nome, senha_hash = partes
             usuarios[nome] = senha_hash
-        else:
-            print("Erro na linha do arquivo 'usuarios.txt':", linha)
 
-# Solicitar o nome do usuário
-nome_usuario = input("Por favor, diga seu nome: ")
-if nome_usuario in usuarios:
-    senha_hash = usuarios[nome_usuario]
-else:
-    print("Usuário não encontrado. Tente novamente.")
+# Solicitar nome de usuário e verificar se ele está registrado
+nome_usuario = input("Digite seu nome de usuário: ")
+if nome_usuario not in usuarios:
+    print("Usuário não registrado.")
+    print("Deseja cadastrar um novo usuário? (s/n)")
+    resposta = input().strip().lower()
+    if resposta == 's':
+        nome_usuario, senha_usuario = cadastrar_usuario()
+        usuarios[nome_usuario] = senha_usuario
+    else:
+        exit()
+
+# Verificar a identidade do usuário
+def solicitar_acao():
+    pass
+
+
+if verificar_identidade(nome_usuario):
+    solicitar_acao()
