@@ -6,4 +6,7 @@ p1 = 1
 p2 = 2
 mPonderada = (num1 * p1 + num2 * p2 + num3) / (p1 + p2 +1)
 
-print(f"A media ponderada da nota é: {mPonderada}")
+if mPonderada >= 60:
+    print(f"Aluno aprovado, Nota: {mPonderada}")
+else:
+    print("Aluno Reprovado")
