@@ -8,7 +8,7 @@ else:
 
 if pos:
     raizq = math.sqrt(num)
-    print("A raiz quadrada de", num, "é:", raizq)
+    print(f"A raiz quadrada de", num, "é:", raizq)
 else:
     quadrado = num ** 2
     print("O quadrado de", num, "é:", quadrado)
