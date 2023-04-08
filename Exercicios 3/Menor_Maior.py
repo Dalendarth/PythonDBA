@@ -4,7 +4,7 @@ maior = float('-inf')  # inicializa a variável com um valor que representa o in
 
 for i in range(1, 11):
     numero = int(input('Digite um número: '))
-    num.append(numero)
+    num.append(numero)  # vai pedir para repetir a linha de cima 10x
     if numero < menor:
         menor = numero
     if numero > maior:
