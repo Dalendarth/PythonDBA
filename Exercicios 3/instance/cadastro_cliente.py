@@ -20,6 +20,19 @@ class Cliente(db.Model):
     endereco = db.Column(db.String(50))
 
 
+from flask import render_template
+
+
+@app.route('/cadastro')
+def cadastro():
+    return render_template('cadastro.html')
+
+
+@app.route('/')
+def index():
+    return 'Bem-vindo ao cadastro de clientes e usuários!'
+
+
 @app.route('/usuarios', methods=['GET'])
 def get_usuarios():
     usuarios = Usuario.query.all()
